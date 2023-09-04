@@ -80,6 +80,10 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # Sound
+    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute")),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -148,11 +152,14 @@ screens = [
                 widget.Sep(),
                 widget.Memory(
                     measure_mem="G",
-                    vormat="Mem: {MemUsed: .1f}{mm}/{MemTotal: .1f}{mm}",
+                    format="Mem: {MemUsed: .1f}{mm}/{MemTotal: .1f}{mm}",
                 ),
                 widget.MemoryGraph(),
                 widget.Sep(),
-                widget.Memory(format="Swap: {SwapUsed: .0f}{ms}/{SwapTotal: .0f}{ms}"),
+                widget.Memory(
+                    measure_mem="G",
+                    format="Swap: {SwapUsed: .1f}{ms}/{SwapTotal: .1f}{ms}",
+                ),
                 widget.SwapGraph(),
                 widget.Sep(),
                 widget.Net(format="{down} ↓↑{up}"),
@@ -162,6 +169,7 @@ screens = [
                 widget.Sep(),
                 widget.BatteryIcon(),
                 widget.Battery(format="{percent:2.0%}"),
+                widget.Volume(),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
@@ -181,10 +189,7 @@ screens = [
                 ),
                 widget.CapsNumLockIndicator(),
                 widget.Sep(),
-                widget.CheckUpdates(
-                    distro='Arch', 
-                    no_update_string='No updates'
-                ),
+                widget.CheckUpdates(distro="Arch", no_update_string="No updates"),
                 widget.Sep(),
                 widget.Systray(),
                 widget.Sep(),
