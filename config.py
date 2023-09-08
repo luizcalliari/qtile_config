@@ -139,12 +139,69 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
+                widget.Spacer(),
+                widget.Sep(),
+                widget.WidgetBox(
+                    text_closed="Menu",
+                    widgets=[
+                        widget.WidgetBox(
+                            text_closed="Browsers",
+                            widgets=[
+                                widget.LaunchBar(
+                                    default_icon="/usr/share/icons/hicolor/256x256/apps/brave-desktop.png",
+                                    progs=[("BRAVE", "brave", "Brave Browser")],
+                                ),
+                                widget.LaunchBar(
+                                    default_icon="/usr/share/icons/hicolor/256x256/apps/firefox.png",
+                                    progs=[("FIREFOX", "firefox", "Firefox Browser")],
+                                ),
+                            ],
+                        ),
+                        widget.Sep(),
+                        widget.WidgetBox(
+                            text_closed="DOCKER",
+                            widgets=[
+                                widget.LaunchBar(
+                                    progs=[
+                                        (
+                                            "Docker desptop start",
+                                            "systemctl --user start docker-desktop",
+                                            "start docker-desktop",
+                                        )
+                                    ]
+                                ),
+                                widget.Sep(),
+                                widget.LaunchBar(
+                                    progs=[
+                                        (
+                                            "Docker desptop stop",
+                                            "systemctl --user stop docker-desktop",
+                                            "stop docker-desktop",
+                                        )
+                                    ]
+                                ),
+                            ],
+                        ),
+                        widget.Sep(),
+                        widget.WidgetBox(
+                            text_closed="Others",
+                            widgets=[
+                                widget.LaunchBar(
+                                    default_icon="/usr/share/icons/hicolor/128x128/apps/postman.png",
+                                    progs=[("POSTMAN", "postman", "Postman")],
+                                ),
+                                widget.LaunchBar(
+                                    default_icon="/usr/share/icons/hicolor/128x128/apps/vlc.png",
+                                    progs=[("VLC", "VLC", "VLC Video")],
+                                ),
+                                widget.LaunchBar(
+                                    progs=[
+                                        ("SEAHORSE", "seahorse", "Gnome-keyring GUI")
+                                    ]
+                                ),
+                            ],
+                        ),
+                    ],
                 ),
                 widget.Sep(),
                 widget.CPU(format="Cpu: {load_percent}%"),
@@ -163,12 +220,12 @@ screens = [
                 widget.SwapGraph(),
                 widget.Sep(),
                 widget.Net(format="{down} ↓↑{up}"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.NetGraph(),
                 widget.Sep(),
                 widget.BatteryIcon(),
                 widget.Battery(format="{percent:2.0%}"),
+                widget.Sep(),
                 widget.Volume(),
             ],
             24,
@@ -181,16 +238,12 @@ screens = [
                 widget.GroupBox(hide_unused=True),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
+                widget.WindowName(),
                 widget.CapsNumLockIndicator(),
                 widget.Sep(),
                 widget.CheckUpdates(distro="Arch", no_update_string="No updates"),
                 widget.Sep(),
+                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 widget.Systray(),
                 widget.Sep(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
