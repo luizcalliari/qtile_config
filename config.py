@@ -24,7 +24,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget
+import subprocess
+
+from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -199,6 +201,15 @@ screens = [
                                         ("SEAHORSE", "seahorse", "Gnome-keyring GUI")
                                     ]
                                 ),
+                                widget.LaunchBar(
+                                    progs=[
+                                        (
+                                            "PAVUCONTROL",
+                                            "pavucontrol",
+                                            "Control volume GUI",
+                                        )
+                                    ]
+                                ),
                             ],
                         ),
                     ],
@@ -255,6 +266,7 @@ screens = [
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
+    Screen(),
 ]
 
 # Drag floating layouts.
@@ -308,3 +320,9 @@ wl_input_rules = None
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
+
+@hook.subscribe.startup
+def on_startup():
+    subprocess.Popen(["setxkbmap", "-layout", "us", "-variant", "intl"])
+    subprocess.Popen(["flameshot"])
