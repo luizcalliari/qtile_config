@@ -24,6 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import os
 import subprocess
 
 from libqtile import bar, hook, layout, widget
@@ -210,6 +211,16 @@ screens = [
                                         )
                                     ]
                                 ),
+                                widget.LaunchBar(
+                                    default_icon="/usr/share/icons/hicolor/128x128/apps/flameshot.png",
+                                    progs=[
+                                        (
+                                            "FLAMESHOT",
+                                            "flameshot",
+                                            "Screenshoot tool",
+                                        )
+                                    ],
+                                ),
                             ],
                         ),
                     ],
@@ -325,4 +336,5 @@ wmname = "LG3D"
 @hook.subscribe.startup
 def on_startup():
     subprocess.Popen(["setxkbmap", "-layout", "us", "-variant", "intl"])
-    subprocess.Popen(["flameshot"])
+    # configs_starts = os.path.expanduser("~/.config/qtile/autostart.sh")
+    # subprocess.Popen([configs_starts])
