@@ -337,5 +337,5 @@ wmname = "LG3D"
 @hook.subscribe.startup
 def on_startup():
     subprocess.Popen(["setxkbmap", "-layout", "us", "-variant", "intl"])
-    # configs_starts = os.path.expanduser("~/.config/qtile/autostart.sh")
-    # subprocess.Popen([configs_starts])
+    configs_starts = os.path.expanduser("~/.config/qtile/autostart.sh")
+    subprocess.Popen([configs_starts])
