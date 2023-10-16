@@ -266,7 +266,7 @@ screens = [
                 widget.WindowName(),
                 widget.CapsNumLockIndicator(),
                 widget.Sep(),
-                widget.CheckUpdates(distro="Arch", no_update_string="No updates"),
+                widget.CheckUpdates(distro="Arch_checkupdates", no_update_string="No updates"),
                 widget.Sep(),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 widget.Systray(),
