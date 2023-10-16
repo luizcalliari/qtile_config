@@ -241,7 +241,7 @@ screens = [
                 ),
                 widget.SwapGraph(),
                 widget.Sep(),
-                widget.Net(format="{down} ↓↑{up}"),
+                widget.Net(format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"),
                 # widget.StatusNotifier(),
                 widget.NetGraph(),
                 widget.Sep(),
