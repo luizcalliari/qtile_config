@@ -6,3 +6,5 @@ xrandr --output HDMI-1 --mode 2560x1080
 xrandr --output HDMI-0 --rotate left --mode 1920x1080
 xset s off
 xset -dpms
+setxkbmap -layout us -variant intl
+setxkbmap -layout us -variant altgr-intl
