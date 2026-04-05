@@ -181,8 +181,6 @@ screens = [
                 widget.Sep(),
                 widget.BatteryIcon(),
                 widget.Battery(format="{percent:2.0%}"),
-                widget.Sep(),
-                widget.Volume(),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
