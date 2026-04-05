@@ -8,3 +8,6 @@ xset s off
 xset -dpms
 setxkbmap -layout us -variant intl
 setxkbmap -layout us -variant altgr-intl
+
+#Create wallpaper folder
+mkdir ~/wallpaper/
