@@ -178,9 +178,10 @@ screens = [
                 widget.Sep(),
                 widget.TextBox("HDD sda:"),
                 widget.HDDBusyGraph(device="sda"),
+                # widget.Sep(),
+                # widget.BatteryIcon(),
+                # widget.Battery(format="{percent:2.0%}"),
                 widget.Sep(),
-                widget.BatteryIcon(),
-                widget.Battery(format="{percent:2.0%}"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
