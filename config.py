@@ -182,6 +182,10 @@ screens = [
                 # widget.BatteryIcon(),
                 # widget.Battery(format="{percent:2.0%}"),
                 widget.Sep(),
+                widget.TextBox("Nvidia:"),
+                widget.NvidiaSensors(
+                  format='temp: {temp}°C, fan speed: {fan_speed}, performance: {perf}'
+                ),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
