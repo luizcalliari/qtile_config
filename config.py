@@ -32,6 +32,8 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+from wallpaper import get_random_wallpaper
+
 mod = "mod4"
 terminal = guess_terminal()
 
@@ -166,6 +168,8 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
+        wallpaper=get_random_wallpaper(extra_path="horizontal"),
+        wallpaper_mode="center",
         top=bar.Bar(
             [
                 widget.Spacer(),
@@ -229,7 +233,10 @@ screens = [
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
-    Screen(),
+    Screen(
+        wallpaper=get_random_wallpaper(extra_path="vertical"),
+        wallpaper_mode="center",
+    ),
 ]
 
 # Drag floating layouts.
