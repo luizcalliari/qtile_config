@@ -15,6 +15,3 @@ xset -dpms
 #Configure keyboard
 setxkbmap -layout us -variant altgr-intl
 setxkbmap -layout us -variant intl
-
-#Create wallpaper folder
-mkdir ~/wallpaper/
