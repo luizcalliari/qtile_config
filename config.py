@@ -85,21 +85,35 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle floating"),
     # Sound ALSA
-    #Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    #Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute")),
-    #Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute")),
+    # Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
+    # Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute")),
+    # Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute")),
     # Sourd Pipeire/PulseAudio
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
+    Key(
+        [],
+        "XF86AudioRaiseVolume",
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+    ),
+    Key(
+        [],
+        "XF86AudioLowerVolume",
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+    ),
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
-
 ]
 
 # rofi configs
-keys.extend([
-    Key(["mod4"], "d", lazy.spawn("rofi -show drun"), desc="Run Rofi Launcher"),
-    Key(["mod4", "shift"], "d", lazy.spawn("rofi -show window"), desc="Switch Windows"),
-])
+keys.extend(
+    [
+        Key(["mod4"], "d", lazy.spawn("rofi -show drun"), desc="Run Rofi Launcher"),
+        Key(
+            ["mod4", "shift"],
+            "d",
+            lazy.spawn("rofi -show window"),
+            desc="Switch Windows",
+        ),
+    ]
+)
 
 
 groups = [Group(i) for i in "123456789"]
@@ -184,7 +198,7 @@ screens = [
                 widget.Sep(),
                 widget.TextBox("Nvidia:"),
                 widget.NvidiaSensors(
-                  format='temp: {temp}°C, fan speed: {fan_speed}, performance: {perf}'
+                    format="temp: {temp}°C, fan speed: {fan_speed}, performance: {perf}"
                 ),
             ],
             24,
@@ -200,7 +214,9 @@ screens = [
                 widget.WindowName(),
                 widget.CapsNumLockIndicator(),
                 widget.Sep(),
-                widget.CheckUpdates(distro="Arch_checkupdates", no_update_string="No updates"),
+                widget.CheckUpdates(
+                    distro="Arch_checkupdates", no_update_string="No updates"
+                ),
                 widget.Sep(),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 widget.Systray(),
