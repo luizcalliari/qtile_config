@@ -1,11 +1,14 @@
 import asyncio
 import os
+import random
 from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
 
 load_dotenv()
+
+WALLPAPER_DIR = Path(os.path.expanduser("~")) / "wallpaper"
 
 
 class Wallpaper:
@@ -18,7 +21,7 @@ class Wallpaper:
         self.IMAGE_DATA_HORIZONTAL = None
         self.IMAGE_TITLE = None
 
-        self.WALLPAPER_DIR = Path(os.path.expanduser("~")) / "wallpaper"
+        self.WALLPAPER_DIR = WALLPAPER_DIR
 
     async def validate_image(self, url: str):
         image_response = requests.get(url, timeout=30)
@@ -103,5 +106,21 @@ async def save_wallpaper():
         print(f"Error: {err}")
 
 
+def get_random_wallpaper(extra_path=None):
+    if extra_path:
+        wallpaper_dir = WALLPAPER_DIR / extra_path
+    else:
+        wallpaper_dir = WALLPAPER_DIR
+
+    try:
+        files = [os.path.join(wallpaper_dir, f) for f in os.listdir(wallpaper_dir)
+                 if f.endswith(('.jpg', '.png', '.jpeg'))]
+        return random.choice(files) if files else None
+    except FileNotFoundError:
+        return None
+
+
 if __name__ == "__main__":
-    asyncio.run(save_wallpaper())
+    # asyncio.run(save_wallpaper())
+    print(get_random_wallpaper(extra_path="vertical"))
+    print(get_random_wallpaper(extra_path="horizontal"))
