@@ -235,7 +235,7 @@ screens = [
     ),
     Screen(
         wallpaper=get_random_wallpaper(extra_path="vertical"),
-        wallpaper_mode="center",
+        wallpaper_mode="fill",
     ),
 ]
 
