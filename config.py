@@ -300,7 +300,7 @@ def on_startup():
     subprocess.Popen([configs_starts])
 
 
-@hook.subscribe.startup_once
+@hook.subscribe.startup
 async def download_wallpaper():
     from wallpaper import save_wallpaper
 
