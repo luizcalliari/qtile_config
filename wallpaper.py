@@ -3,7 +3,7 @@ import os
 import random
 from pathlib import Path
 
-import requests
+import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -24,19 +24,21 @@ class Wallpaper:
         self.WALLPAPER_DIR = WALLPAPER_DIR
 
     async def validate_image(self, url: str):
-        image_response = requests.get(url, timeout=30)
-        image_response.raise_for_status()
+        async with httpx.AsyncClient() as client:
+            image_response = await client.get(url, timeout=30)
+            image_response.raise_for_status()
 
         return image_response.content
 
     async def fetch_nasa_daily_image(self):
         try:
-            response = requests.get(
-                url=self.NASA_API_URL,
-                params={"api_key": self.NASA_API_KEY},
-                timeout=30,
-            )
-            response.raise_for_status()
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    url=self.NASA_API_URL,
+                    params={"api_key": self.NASA_API_KEY},
+                    timeout=30,
+                )
+                response.raise_for_status()
             response = response.json()
 
             if response.get("media_type") != "image":
@@ -98,12 +100,17 @@ class Wallpaper:
 
 
 async def save_wallpaper():
-    try:
-        wallpaper = Wallpaper(nasa_api_key=os.getenv("NASA_API_KEY"))
-        await wallpaper.fetch_nasa_daily_image()
-        await wallpaper.add_nasa_daily_image_to_folder()
-    except Exception as err:
-        print(f"Error: {err}")
+    while True:
+        try:
+            wallpaper = Wallpaper(nasa_api_key=os.getenv("NASA_API_KEY"))
+            await wallpaper.fetch_nasa_daily_image()
+            await wallpaper.add_nasa_daily_image_to_folder()
+        except Exception as err:
+            print(f"Error: {err}")
+            print("Retrying in 60 seconds...")
+            await asyncio.sleep(60)
+        else:
+            break
 
 
 def get_random_wallpaper(extra_path=None):
