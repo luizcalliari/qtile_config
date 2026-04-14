@@ -107,8 +107,8 @@ async def save_wallpaper():
             await wallpaper.add_nasa_daily_image_to_folder()
         except Exception as err:
             print(f"Error: {err}")
-            print("Retrying in 60 seconds...")
-            await asyncio.sleep(60)
+            print(f"Retrying in {60 * 5} seconds...")
+            await asyncio.sleep(60 * 5)
         else:
             break
 
