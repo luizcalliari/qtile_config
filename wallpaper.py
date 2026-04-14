@@ -128,6 +128,6 @@ def get_random_wallpaper(extra_path=None):
 
 
 if __name__ == "__main__":
-    # asyncio.run(save_wallpaper())
-    print(get_random_wallpaper(extra_path="vertical"))
-    print(get_random_wallpaper(extra_path="horizontal"))
+    asyncio.run(save_wallpaper())
+    # print(get_random_wallpaper(extra_path="vertical"))
+    # print(get_random_wallpaper(extra_path="horizontal"))
